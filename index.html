@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株式会社Imajin Lab. | 想像を、価値に変える。</title>
+  <meta name="description" content="株式会社Imajin Lab.は、不動産コンサルティングと広告業を融合させた専門家集団です。想像力を確かな価値へと昇華させます。">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       CSS Variables
+    ============================================================ */
+    :root {
+      --gold:        #c9a84c;
+      --gold-light:  #e8d08a;
+      --gold-dark:   #9a7a2e;
+      --ink:         #0d1117;
+      --ink-mid:     #1e2530;
+      --ink-soft:    #2d3748;
+      --slate:       #64748b;
+      --slate-light: #94a3b8;
+      --cream:       #faf9f7;
+      --white:       #ffffff;
+      --border:      #e8e4df;
+      --transition:  0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ============================================================
+       Reset & Base
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: var(--white);
+      color: var(--ink);
+      line-height: 1.8;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ============================================================
+       Typography Helpers
+    ============================================================ */
+    .font-serif {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .font-serif-jp {
+      font-family: 'Noto Serif JP', serif;
+    }
+
+    .label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ============================================================
+       Scroll Reveal
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.35s; }
+    .reveal-delay-4 { transition-delay: 0.5s; }
+
+    /* ============================================================
+       Navigation
+    ============================================================ */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+
+    #nav.scrolled {
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 2px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Logo */
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+    }
+
+    .nav-logo span {
+      color: var(--gold);
+    }
+
+    /* Desktop links */
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.3s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.35s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--ink);
+      transition: transform 0.35s, opacity 0.35s;
+      transform-origin: center;
+    }
+
+    .nav-hamburger.open span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+
+    .nav-hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-hamburger.open span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+
+    /* Mobile drawer */
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+      padding: 24px 32px 32px;
+      transform: translateY(-10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .nav-drawer.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-drawer ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .nav-drawer a {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      transition: color 0.3s;
+    }
+
+    .nav-drawer a:hover {
+      color: var(--gold);
+    }
+
+    /* ============================================================
+       Hero
+    ============================================================ */
+    #hero {
+      position: relative;
+      height: 100svh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.06);
+      transition: transform 8s ease-out;
+    }
+
+    .hero-bg img.loaded {
+      transform: scale(1);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(13, 17, 23, 0.45) 0%,
+        rgba(13, 17, 23, 0.35) 60%,
+        rgba(13, 17, 23, 0.65) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: var(--white);
+      padding: 0 24px;
+      max-width: 900px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(16px, 2vw, 22px);
+      letter-spacing: 0.35em;
+      margin-bottom: 28px;
+      opacity: 0.85;
+    }
+
+    .hero-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(36px, 6vw, 76px);
+      font-weight: 300;
+      line-height: 1.35;
+      letter-spacing: 0.06em;
+      margin-bottom: 32px;
+    }
+
+    .hero-divider {
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 28px;
+    }
+
+    .hero-sub {
+      font-size: clamp(13px, 1.4vw, 15px);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      line-height: 2;
+      opacity: 0.88;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .hero-scroll-text {
+      font-size: 9px;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 56px;
+      background: rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-scroll-line::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gold);
+      animation: scrollDown 2.2s ease-in-out infinite;
+    }
+
+    @keyframes scrollDown {
+      0%   { transform: translateY(-100%); }
+      50%  { transform: translateY(0); }
+      100% { transform: translateY(100%); }
+    }
+
+    /* ============================================================
+       Section Commons
+    ============================================================ */
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 300;
+      line-height: 1.5;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+    }
+
+    .section-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 28px 0;
+    }
+
+    /* ============================================================
+       About Section
+    ============================================================ */
+    #about {
+      padding: 120px 0 140px;
+      background: var(--white);
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--slate);
+      line-height: 2;
+      margin-bottom: 20px;
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .about-image-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-image-wrap::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 60%;
+      height: 60%;
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .about-image-wrap img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      position: relative;
+      z-index: 1;
+      transition: transform 1.8s ease-out;
+    }
+
+    .about-image-wrap:hover img {
+      transform: scale(1.04);
+    }
+
+    /* ============================================================
+       Services Section
+    ============================================================ */
+    #services {
+      padding: 120px 0 140px;
+      background: var(--cream);
+    }
+
+    .services-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+    }
+
+    .service-card {
+      background: var(--white);
+      padding: 56px 52px 60px;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.4s ease;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.5s ease;
+    }
+
+    .service-card:hover::before {
+      width: 100%;
+    }
+
+    .service-card:hover {
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 36px;
+      color: var(--slate-light);
+      transition: color 0.4s;
+    }
+
+    .service-card:hover .service-icon {
+      color: var(--gold);
+    }
+
+    .service-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px;
+      font-weight: 300;
+      color: rgba(201, 168, 76, 0.1);
+      position: absolute;
+      top: 32px;
+      right: 40px;
+      line-height: 1;
+      transition: color 0.4s;
+    }
+
+    .service-card:hover .service-number {
+      color: rgba(201, 168, 76, 0.2);
+    }
+
+    .service-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 20px;
+      color: var(--ink);
+    }
+
+    .service-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--slate);
+      line-height: 2;
+      margin-bottom: 28px;
+    }
+
+    .service-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .service-list li {
+      font-size: 13px;
+      color: var(--slate-light);
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .service-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    /* ============================================================
+       Message Section
+    ============================================================ */
+    #message {
+      padding: 140px 0;
+      background: var(--ink);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #message::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    #message::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .message-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(80px, 15vw, 200px);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.02);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .message-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 40px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .message-quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 80px;
+      line-height: 0.5;
+      color: var(--gold);
+      opacity: 0.4;
+      margin-bottom: 36px;
+      display: block;
+    }
+
+    .message-body {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 300;
+      line-height: 1.9;
+      letter-spacing: 0.06em;
+      margin-bottom: 48px;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .message-detail {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.45);
+      line-height: 2;
+      max-width: 600px;
+      margin: 0 auto 56px;
+    }
+
+    .message-sig {
+      display: inline-block;
+      text-align: right;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 24px;
+    }
+
+    .message-sig-role {
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      margin-bottom: 8px;
+    }
+
+    .message-sig-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .message-sig-name-jp {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* ============================================================
+       Company Section
+    ============================================================ */
+    #company {
+      padding: 120px 0 140px;
+      background: var(--white);
+    }
+
+    .company-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+    }
+
+    .company-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .company-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .company-table tr:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .company-table th {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--slate-light);
+      padding: 22px 0;
+      width: 30%;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .company-table td {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--ink-soft);
+      padding: 22px 0 22px 24px;
+      line-height: 1.8;
+      vertical-align: top;
+    }
+
+    /* ============================================================
+       Location Section
+    ============================================================ */
+    #location {
+      height: 420px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #location img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(40%) brightness(55%);
+      transition: transform 8s ease-out;
+    }
+
+    #location:hover img {
+      transform: scale(1.04);
+    }
+
+    .location-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .location-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.2em;
+    }
+
+    .location-name {
+      font-size: 11px;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 300;
+    }
+
+    .location-divider {
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.6;
+      margin: 4px 0;
+    }
+
+    /* ============================================================
+       Footer
+    ============================================================ */
+    footer {
+      background: var(--ink-mid);
+      color: rgba(255, 255, 255, 0.35);
+      padding: 48px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .footer-logo span {
+      color: var(--gold);
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .footer-nav a {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3);
+      transition: color 0.3s;
+    }
+
+    .footer-nav a:hover {
+      color: var(--gold);
+    }
+
+    .footer-copy {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.2);
+      width: 100%;
+      text-align: center;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* ============================================================
+       Responsive
+    ============================================================ */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
+
+      .nav-drawer {
+        display: block;
+      }
+
+      .about-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 0 24px;
+      }
+
+      .about-image-wrap::before {
+        display: none;
+      }
+
+      .about-image-wrap img {
+        height: 320px;
+      }
+
+      .services-inner {
+        padding: 0 24px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card {
+        padding: 44px 32px 48px;
+      }
+
+      .message-inner {
+        padding: 0 24px;
+      }
+
+      .company-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 0 24px;
+      }
+
+      .footer-inner {
+        padding: 0 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .footer-nav {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      #about,
+      #services,
+      #company {
+        padding: 80px 0 100px;
+      }
+
+      #message {
+        padding: 100px 0;
+      }
+
+      .nav-inner {
+        padding: 0 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       Navigation
+  ============================================================ -->
+  <nav id="nav" role="navigation" aria-label="メインナビゲーション">
+    <div class="nav-inner">
+
+      <a href="#" class="nav-logo" aria-label="Imajin Lab. トップへ">
+        Imajin<span>Lab.</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#message">Message</a></li>
+        <li><a href="#company">Company</a></li>
+      </ul>
+
+      <button class="nav-hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="nav-drawer" id="drawer" role="dialog" aria-label="モバイルメニュー">
+    <ul>
+      <li><a href="#about"    class="drawer-link">About</a></li>
+      <li><a href="#services" class="drawer-link">Services</a></li>
+      <li><a href="#message"  class="drawer-link">Message</a></li>
+      <li><a href="#company"  class="drawer-link">Company</a></li>
+    </ul>
+  </div>
+
+
+  <!-- ============================================================
+       Hero
+  ============================================================ -->
+  <header id="hero" role="banner">
+
+    <div class="hero-bg">
+      <img
+        id="hero-img"
+        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000"
+        alt=""
+        role="presentation"
+      >
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow reveal">Imagination creates the value.</p>
+      <h1 class="hero-title reveal reveal-delay-1">
+        想像を、<br>確かな価値に変える。
+      </h1>
+      <div class="hero-divider reveal reveal-delay-2"></div>
+      <p class="hero-sub reveal reveal-delay-3">
+        不動産コンサルティングと、心を動かす広告戦略。<br>
+        二つの専門性をラボのように融合させ、<br>
+        まだ見ぬビジネスの可能性を形にします。
+      </p>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <span class="hero-scroll-text">Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+
+  </header>
+
+
+  <!-- ============================================================
+       About
+  ============================================================ -->
+  <section id="about" aria-labelledby="about-heading">
+    <div class="about-inner">
+
+      <div class="reveal">
+        <span class="section-label">About Us</span>
+        <h2 id="about-heading" class="section-title">
+          多角的な視点が、<br>新たな市場を拓く。
+        </h2>
+        <div class="section-divider"></div>
+        <div class="about-text">
+          <p>
+            株式会社Imajin Lab.（イマジンラボ）は、不動産と広告という
+            一見異なる二つの領域を融合させたプロフェッショナル集団です。
+          </p>
+          <p>
+            物件が持つ本来のポテンシャルを見抜き、最適化するコンサルティング力。
+            そして、その魅力を的確なメッセージとして市場へ届ける広告戦略。
+            私たちは単なる支援に留まらず、クライアントと共に未来を「想像」し、
+            持続可能な「価値」へと昇華させます。
+          </p>
+          <p>
+            研究所（ラボ）のように仮説を立て、検証し、改善を繰り返す。
+            その姿勢こそが、Imajin Lab.の根幹です。
+          </p>
+        </div>
+      </div>
+
+      <div class="about-image-wrap reveal reveal-delay-2">
+        <img
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200"
+          alt="洗練されたオフィスインテリア"
+          loading="lazy"
+        >
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Services
+  ============================================================ -->
+  <section id="services" aria-labelledby="services-heading">
+    <div class="services-inner">
+
+      <div class="services-header reveal">
+        <span class="section-label">Services</span>
+        <h2 id="services-heading" class="section-title">事業内容</h2>
+      </div>
+
+      <div class="services-grid">
+
+        <!-- Service 01 -->
+        <div class="service-card reveal">
+          <span class="service-number">01</span>
+          <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+              d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5
+                 M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5">
+            </path>
+          </svg>
+          <h3 class="service-title">不動産コンサルティング</h3>
+          <p class="service-desc">
+            不動産の有効活用から資産運用、再生プロジェクトまで、
+            専門的な知見に基づいたコンサルティングを提供します。
+            市場動向を鋭く分析し、収益性の最大化とリスクの最小化を実現します。
+          </p>
+          <ul class="service-list">
+            <li>不動産資産の最適化・運用アドバイス</li>
+            <li>休眠資産の有効活用提案</li>
+            <li>不動産再生コンサルティング</li>
+            <li>収益物件の取得・売却支援</li>
+          </ul>
+        </div>
+
+        <!-- Service 02 -->
+        <div class="service-card reveal reveal-delay-2">
+          <span class="service-number">02</span>
+          <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+              d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5
+                 a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+            </path>
+          </svg>
+          <h3 class="service-title">広告業</h3>
+          <p class="service-desc">
+            ブランドの本質を捉え、ターゲットの感情に届くクリエイティブを創出します。
+            デジタルからアナログまで、最適なメディアミックスで
+            ビジネスの認知拡大と成長を加速させます。
+          </p>
+          <ul class="service-list">
+            <li>ブランディング戦略の立案</li>
+            <li>デジタルマーケティング・運用型広告</li>
+            <li>クリエイティブ制作（Web / Graphic）</li>
+            <li>SNSマーケティング・コンテンツ戦略</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Message
+  ============================================================ -->
+  <section id="message" aria-labelledby="message-heading">
+
+    <div class="message-bg-text" aria-hidden="true">Imagine</div>
+
+    <div class="message-inner reveal">
+      <span class="section-label" style="color: rgba(201,168,76,0.7);">Message</span>
+      <span class="message-quote-mark" aria-hidden="true">"</span>
+      <h2 id="message-heading" class="message-body">
+        私たちは、単なる「仲介者」ではなく、<br>
+        価値を創造する「ラボ」でありたい。
+      </h2>
+      <p class="message-detail">
+        時代が激しく変化する中で、普遍的な価値とは何か。
+        私たちは常にその問いに向き合っています。
+        不動産というハードの価値に、広告というソフトの魔法をかける。
+        Imajin Lab.は想像力の翼を広げ、クライアントの皆様に
+        驚きと納得の結果をお届けすることをお約束します。
+      </p>
+      <div class="message-sig">
+        <p class="message-sig-role">Representative Director</p>
+        <p class="message-sig-name-jp">今井 仁</p>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       Company
+  ============================================================ -->
+  <section id="company" aria-labelledby="company-heading">
+    <div class="company-inner">
+
+      <div class="reveal">
+        <span class="section-label">Company</span>
+        <h2 id="company-heading" class="section-title">会社概要</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <table class="company-table">
+          <tbody>
+            <tr>
+              <th scope="row">Name</th>
+              <td>株式会社Imajin Lab.</td>
+            </tr>
+            <tr>
+              <th scope="row">Representative</th>
+              <td>代表取締役　今井 仁</td>
+            </tr>
+            <tr>
+              <th scope="row">Address</th>
+              <td>
+                〒107-0062<br>
+                東京都港区南青山1-1-1<br>
+                新青山ビル東館7階
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Business</th>
+              <td>不動産コンサルティング業、広告業</td>
+            </tr>
+            <tr>
+              <th scope="row">Area</th>
+              <td>首都圏を中心に活動</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Location
+  ============================================================ -->
+  <section id="location" aria-label="所在地エリア">
+    <img
+      src="imajinlab.jpg"
+      alt="東京・南青山エリア"
+      loading="lazy"
+    >
+    <div class="location-overlay">
+      <p class="location-label">Location</p>
+      <div class="location-divider"></div>
+      <p class="location-name">Minami Aoyama, Tokyo</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Footer
+  ============================================================ -->
+  <footer role="contentinfo">
+    <div class="footer-inner">
+
+      <div class="footer-logo">
+        Imajin<span>Lab.</span>
+      </div>
+
+      <nav aria-label="フッターナビゲーション">
+        <ul class="footer-nav">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#message">Message</a></li>
+          <li><a href="#company">Company</a></li>
+        </ul>
+      </nav>
+
+      <p class="footer-copy">
+        &copy; <span id="year"></span> Imajin Lab. Inc. All Rights Reserved.
+      </p>
+
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       JavaScript
+  ============================================================ -->
+  <script>
+    /* ----------------------------------------------------------
+       Copyright year
+    ---------------------------------------------------------- */
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ----------------------------------------------------------
+       Scroll: nav style
+    ---------------------------------------------------------- */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 40) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    /* ----------------------------------------------------------
+       Hamburger menu
+    ---------------------------------------------------------- */
+    const hamburger = document.getElementById('hamburger');
+    const drawer    = document.getElementById('drawer');
+
+    hamburger.addEventListener('click', function () {
+      const isOpen = drawer.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    document.querySelectorAll('.drawer-link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        drawer.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* ----------------------------------------------------------
+       Hero image: ken-burns on load
+    ---------------------------------------------------------- */
+    const heroImg = document.getElementById('hero-img');
+    heroImg.addEventListener('load', function () {
+      heroImg.classList.add('loaded');
+    });
+    if (heroImg.complete) {
+      heroImg.classList.add('loaded');
+    }
+
+    /* ----------------------------------------------------------
+       Scroll reveal
+    ---------------------------------------------------------- */
+    function runReveal() {
+      var reveals = document.querySelectorAll('.reveal');
+      var wh = window.innerHeight;
+      for (var i = 0; i < reveals.length; i++) {
+        var top = reveals[i].getBoundingClientRect().top;
+        if (top < wh - 100) {
+          reveals[i].classList.add('active');
+        }
+      }
+    }
+
+    window.addEventListener('scroll', runReveal, { passive: true });
+    window.addEventListener('load',   runReveal);
+    runReveal();
+
+    /* ----------------------------------------------------------
+       Smooth scroll for anchor links
+    ---------------------------------------------------------- */
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        var offset = 72; /* nav height */
+        var top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>
